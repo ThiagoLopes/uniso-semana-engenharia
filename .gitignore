@@ -105,3 +105,6 @@ db.sqlite3
 
 # tags
 tags
+
+# uploads
+uploads/
