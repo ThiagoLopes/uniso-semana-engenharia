@@ -22,7 +22,7 @@ class Palestra(models.Model):
     number_vacancies = models.SmallIntegerField(_('Vagas'))
     created = CreationDateTimeField()
     modification = ModificationDateTimeField()
-    slug = AutoSlugField(populate_from=['talk_name', 'speaker_name'])
+    slug = AutoSlugField(populate_from=['talk_name', 'room'])
 
     def __str__(self):
         return self.talk_name

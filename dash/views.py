@@ -1,16 +1,16 @@
 from django.views.generic.base import TemplateView
-from .models import Palestra
-
-# Create your views here.
+from .models import Palestra, Palestrante
 
 
 class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
-    def qs_palestra(self):
-        #  TODO change to TEACHERS MODELS
-        speaker_four = Palestra.objects.all()[:8]
+    def get_qs_palestrante(self):
+        speaker_four = Palestrante.objects.all()[:8]
         return speaker_four
+
+    def get_qs_palestra(self):
+        return Palestra.objects.all()
 
     def get_qs_all_days_distinct(self):
         all_days = Palestra.objects.dates('date', 'day')
@@ -18,9 +18,10 @@ class HomeTemplateView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['palestra_list'] = Palestra.objects.all()
+        context['palestra_list'] = self.get_qs_palestra()
+        context['palestrante_list'] = self.get_qs_palestrante()
         context['all_days'] = self.get_qs_all_days_distinct()
         return context
 
 
-home = HomeTemplateView.as_view()
+home_template_view = HomeTemplateView.as_view()
