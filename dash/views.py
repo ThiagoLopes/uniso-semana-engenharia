@@ -8,6 +8,7 @@ class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
     def qs_palestra(self):
+        #  TODO change to TEACHERS MODELS
         speaker_four = Palestra.objects.all()[:8]
         return speaker_four
 
@@ -17,7 +18,7 @@ class HomeTemplateView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['palestra_list'] = self.qs_palestra()
+        context['palestra_list'] = Palestra.objects.all()
         context['all_days'] = self.get_qs_all_days_distinct()
         return context
 
