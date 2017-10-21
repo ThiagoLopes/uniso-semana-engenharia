@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-import dash
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin-uniso/', admin.site.urls),
     url(r'^', include('dash.urls', namespace='dash'))
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
