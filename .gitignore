@@ -100,5 +100,8 @@ ENV/
 # mypy
 .mypy_cache/
 
-#db
+# db
 db.sqlite3
+
+# tags
+tags
