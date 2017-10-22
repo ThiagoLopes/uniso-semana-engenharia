@@ -1,14 +1,20 @@
 language: python
+
 python:
   #versão do python
   - "3.6"
+
 env:
   - SECRET_KEY=TopSecretKey DEBUG=True ALLOWED_HOSTS=127.0.0.1 #Configuração das variáveis de ambiente
+
 install:
   - pip install -r requirements.txt
     #comandos a serem executados para realizar o teste
+    #
 script:
   - python manage.py check
   - python manage.py test
 
-# TODO after-success
+after_success:
+  - pip install codecov
+  - codecov
