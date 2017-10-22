@@ -1,10 +1,13 @@
+import os
 import datetime
 from time import sleep
-from django.core.urlresolvers import reverse
 from django.urls import resolve
 from django.test import TestCase, Client
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
 from .views import HomeTemplateView
-from .models import Palestra
+from .models import Palestra, Palestrante
 
 # Create your tests here.
 
@@ -12,6 +15,12 @@ from .models import Palestra
 class TestModel(TestCase):
     def setUp(self):
         t = datetime.datetime.now().time()
+        file_image = os.path.join(
+            settings.STATICFILES_DIRS[0], 'img', 'logodae.png')
+        image_mock = SimpleUploadedFile(
+            name='test.png',
+            content=open(file_image, 'rb').read(),
+            content_type='image/png')
         self.data = {
             'talk_name': 'tester man',
             'talk_description': 'Lorem',
@@ -21,6 +30,11 @@ class TestModel(TestCase):
             'hour_init': t,
             'hour_end': t.replace(hour=t.hour + 1),
             'number_vacancies': 100,
+        }
+        self.data_palestrante = {
+            'speaker_name': 'Man Speaker',
+            'speaker_description': 'Lorem Lorem Lorem',
+            'image': image_mock
         }
 
     def test_model_palestra(self):
@@ -40,6 +54,38 @@ class TestModel(TestCase):
         sleep(.1)
         p.save()
         self.assertNotEqual(p.modification, t)
+
+    def test_model_palestrante(self):
+        p = Palestrante.objects.create(**self.data_palestrante)
+        self.assertIsInstance(p, Palestrante)
+
+    def test_model_palestra_len_palestrante_one(self):
+        palestrante = Palestrante.objects.create(**self.data_palestrante)
+        palestra = Palestra.objects.create(**self.data)
+        palestra.palestrante.add(palestrante)
+        self.assertEqual(palestra.len_palestrantes, 1)
+
+    def test_model_palestra_len_palestrante_two(self):
+        palestrante_one = Palestrante.objects.create(**self.data_palestrante)
+        palestrante_two = Palestrante.objects.create(**self.data_palestrante)
+        palestra = Palestra.objects.create(**self.data)
+        palestra.palestrante.add(palestrante_one)
+        palestra.palestrante.add(palestrante_two)
+        self.assertEqual(palestra.len_palestrantes, 2)
+
+    def test_model_str_all_palestrante(self):
+        palestrante = Palestrante.objects.create(**self.data_palestrante)
+        palestra = Palestra.objects.create(**self.data)
+        palestra.palestrante.add(palestrante)
+        self.assertEqual(palestra.str_all_palestrante, str(palestrante))
+
+    def test_property_len_palestra(self):
+        p = Palestra.objects.create(**self.data)
+        self.assertFalse(callable(p.len_palestrantes))
+
+    def test_property_str_all_palestrante(self):
+        p = Palestra.objects.create(**self.data)
+        self.assertFalse(callable(p.str_all_palestrante))
 
 
 class TestHomeTemplateView(TestCase):
