@@ -40,9 +40,10 @@
     <div class="row hero-header" id="home">
       <div class="col-md-7">
         <img src="{% static "img/logodae.png" %}" class="logo">
-        <h1>{% trans 'Semana da Engenharia <sup>UNISO</sup>' %}</h1>
+        <h1>{% trans 'Semana da Engenharia' %}</h1>
         <h3>{% trans 'Feito por alunos para alunos' %}</h3>
-        <p> {% trans 'A Setima edição da Semana da Engenharia ocorre agora período de 10 de novembro a 17 de novembro na ' %}<a href="https://uniso.br">{% trans 'Universidade de Sorocaba' %}</a> -  <a href="https://www.google.com.br/maps/place/Universidade+de+Sorocaba+-+Cidade+Universit%C3%A1ria+Prof.+Aldo+Vannucchi/@-23.4956961,-47.4145462,15.75z/data=!4m5!3m4!1s0x94cf61ce4634d061:0x54f9a979acd0e988!8m2!3d-23.4946771!4d-47.3989677">{% trans 'Câmpus Cidade Universitária Professor Aldo Vannucchi' %}</a>. {% trans 'O evento busca oferecer a oportunidade de dialogo e compartilhamento de conhecimento entre alunos, docentes, empresas e até mesmo pessoas interessadas.' %}</p>  
+        <p>{% trans 'A Setima edição da Semana da Engenharia ocorre no período de 10 de novembro a 17 de novembro na ' %}<a class="text-white shadow" href="https://uniso.br">{% trans 'Universidade de Sorocaba' %}</a>.</p>
+        <p>{% trans 'O evento busca oferecer a oportunidade de dialogo e compartilhamento de conhecimento entre alunos, docentes, empresas e até mesmo pessoas interessadas.' %}</p>
         <p>{% trans 'Conheça a programação e se inscreva no que melhor te reapresenta!' %} </p>
         <h4>20<sup>th</sup> a 22<sup>nd</sup>  {% trans 'Outubro' %}, 2017</h4>
         <a href="#" class="btn btn-lg btn-red">Inscreva-se</a>
@@ -77,12 +78,13 @@
     <hr>
     <!-- Start: Speakers -->
     <div class="row me-row content-ct speaker" id="speakers">
-      <h2 class="row-title">Meet the Speakers</h2>
-      {% for palestra in palestra_list %}
+      <h2 class="row-title">{% trans 'Palestrantes' %}</h2>
+      {% for p in palestrante_list %}
       <div class="col-md-4 col-sm-6 feature">
-        <h3>{{ palestra.speaker_name }}</h3>
-        <p>{% lorem %}</p>
-        <ul class="speaker-social">
+        <img src="{{ p.image }}" alt="{{ p.speaker_name }}" class="speaker-img">
+        <h3>{{ p.speaker_name|title }}</h3>
+        <p>{{ p.speaker_description|title }}</p>
+        <ul class="hide speaker-social">
           <li><a href="#"><span class="ti-facebook"></span></a></li>
           <li><a href="#"><span class="ti-twitter-alt"></span></a></li>
           <li><a href="#"><span class="ti-linkedin"></span></a></li>
@@ -90,11 +92,13 @@
       </div>
       {% endfor %}
     </div>
-    <!-- End: Speakers -->
   </div>
+  <!-- End: Speakers -->
 
+  <hr>
+  
   <!-- Start: Tickets -->
-  <div class="container-fluid tickets" id="tickets" >
+  <div class="hide container-fluid tickets" id="tickets" >
     <div class="row me-row content-ct">
       <h2 class="row-title">{% trans 'Inscreva-se' %}</h2>
       <div class="col-md-4 col-sm-6 col-md-offset-2">
@@ -144,9 +148,6 @@
                 <div class="col-md-6">
                   <div class="media">
                     <div class="media-left">
-                      <a href="#">
-                        <img class="media-object" src="img/speaker-1.png" alt="...">
-                      </a>
                     </div>
                     <div class="media-body">
                       <h4 class="media-heading">{{ palestra.hour_init }} {% trans 'até' %} {{ palestra.hour_end }}</h4>

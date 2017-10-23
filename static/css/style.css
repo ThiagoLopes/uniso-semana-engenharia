@@ -352,3 +352,15 @@ right: 0;
 top: 100px;
 z-index:999999;
 }
+
+.shadow{
+  text-shadow: #FE2573 0.1em 0.1em 0.5em;
+}
+
+.shadow:hover{
+  text-shadow: 0 0 0;
+}
+
+.text-white{
+  color: #fff;
+}
