@@ -27,12 +27,14 @@
           <span class="dot"></span>
         </a>
       </li>
+      {% if all_days %}
       <li>
         <a href="#schedule" class="page-scroll">
           <span class="menu-title">{% trans 'Programação' %}</span>
           <span class="dot"></span>
         </a>
       </li>
+      {% endif %}
     </ul>
   </nav>
   <div class="container-fluid">
@@ -81,7 +83,8 @@
       <h2 class="row-title">{% trans 'Palestrantes' %}</h2>
       {% for p in palestrante_list %}
       <div class="col-md-4 col-sm-6 feature">
-        <img src="{{ p.image }}" alt="{{ p.speaker_name }}" class="speaker-img">
+        <img src="{{ p.image.url }}" 
+        alt="{{ p.speaker_name }}" class="speaker-img">
         <h3>{{ p.speaker_name|title }}</h3>
         <p>{{ p.speaker_description|title }}</p>
         <ul class="hide speaker-social">
@@ -118,6 +121,7 @@
   <!-- End: Tickets -->
 
   <!-- Start: Schedule -->
+  {% if all_days %}
   <div class="container">
     <div class="row me-row schedule" id="schedule">
       <h2 class="row-title content-ct">{% trans 'Programação' %}</h2>
@@ -167,11 +171,12 @@
         </div>
       </div>
     </div>
+    {% endif %}
     <!-- End: Schedule -->
 
     <!-- Start: Footer -->
     <div class="container-fluid footer">
-      <div class="row contact">
+      <div class="hide row contact">
         <div class="col-md-6 contact-form">
           <h3 class="content-ct"><span class="ti-email"></span> Contact Form</h3>
           <form class="form-horizontal" data-toggle="validator" role="form">
@@ -217,10 +222,10 @@
       </div>
       <div class="row footer-credit">
         <div class="col-md-6 col-sm-6">
-          <p>&copy; 2017, <a href="http://www.designerdada.com">DesignerDada.com</a> | All rights reserved. | <a href="http://designerdada.com/meetup-free-responsive-bootstrap-template/">Download this template</a></p>
+          <p>&copy; 2017, <a href="http://designerdada.com/meetup-free-responsive-bootstrap-template/">DesignerDada</a> | All rights reserved.</p>
         </div>
         <div class="col-md-6 col-sm-6">
-          <ul class="footer-menu">
+          <ul class="hide footer-menu">
             <li><a href="#">About Us</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms &amp; Condition</a></li>
