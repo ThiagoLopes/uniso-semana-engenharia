@@ -1,4 +1,5 @@
 from django.db import models
+from PIL import Image
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import (CreationDateTimeField,
                                          ModificationDateTimeField,
@@ -17,6 +18,24 @@ class Palestrante(models.Model):
 
     def __str__(self):
         return self.speaker_name
+
+    def crop_values(self, width, height):
+        new_height, new_width = [min(width, height)] * 2
+        left = (width - new_width) / 2
+        top = (height - new_height) / 2
+        right = (width + new_width) / 2
+        bottom = (height + new_height) / 2
+        return (left, top, right, bottom)
+
+    def crop_image(self, original):
+        image = Image.open(original)
+        image_cropped = image.crop(self.crop_values(original.width,
+                                                    original.height))
+        image_cropped.save(original.file.name, image_cropped.format)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.crop_image(self.image)
 
 
 class Palestra(models.Model):
