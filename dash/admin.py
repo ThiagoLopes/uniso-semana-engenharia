@@ -5,7 +5,12 @@ from .models import Palestra, Palestrante
 
 
 class PalestraAdmin(admin.ModelAdmin):
-    empty_value_display = '-vazio-'
+    list_display = ('talk_name', 'talk_description', 'local', 'hour_init',
+                    'hour_end', 'palestrantes')
+    filter_horizontal = ('palestrante',)
+
+    def palestrantes(self, obj):
+        return ', '.join([str(p) for p in obj.palestrante.all()])
 
 
 class PalestranteAdmin(admin.ModelAdmin):
