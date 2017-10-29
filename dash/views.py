@@ -6,11 +6,11 @@ class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
     def get_qs_palestrante(self):
-        speaker_four = Palestrante.objects.all()[:8]
+        speaker_four = Palestrante.objects.all()[:6]
         return speaker_four
 
     def get_qs_palestra(self):
-        return Palestra.objects.all()
+        return Palestra.objects.all().prefetch_related('palestrante')
 
     def get_qs_all_days_distinct(self):
         all_days = Palestra.objects.dates('date', 'day')
