@@ -108,3 +108,6 @@ tags
 
 # uploads
 uploads/
+
+# staticfiles
+staticfiles
