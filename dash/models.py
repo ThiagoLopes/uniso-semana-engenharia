@@ -1,4 +1,6 @@
+import os
 from django.db import models
+from django.conf import settings
 from PIL import Image
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import (CreationDateTimeField,
@@ -14,7 +16,7 @@ class Palestrante(models.Model):
     speaker_description = models.TextField(
         _('Sobre o palestrante'), max_length=45, null=True)
     image = models.ImageField(upload_to='palestrante/%Y',
-                              null=False)
+                              default='speaker-1.png')
 
     def __str__(self):
         return self.speaker_name
@@ -35,7 +37,8 @@ class Palestrante(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.crop_image(self.image)
+        if self.image.name != 'speaker-1.png':
+            self.crop_image(self.image)
 
 
 class Palestra(models.Model):
@@ -56,7 +59,7 @@ class Palestra(models.Model):
     hour_end = models.TimeField(
         _('Término'))
     number_vacancies = models.SmallIntegerField(
-        _('Vagas'))
+        _('Vagas'), default=100)
     created = CreationDateTimeField()
     modification = ModificationDateTimeField()
     slug = AutoSlugField(
