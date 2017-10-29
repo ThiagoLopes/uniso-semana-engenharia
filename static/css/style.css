@@ -364,3 +364,13 @@ z-index:999999;
 .text-white{
   color: #fff;
 }
+
+.description{
+  background-color: #efefef;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.palestra-padding{
+  padding: 0 10px;
+}

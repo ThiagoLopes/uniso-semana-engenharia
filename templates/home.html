@@ -152,11 +152,15 @@
                 <div class="col-md-6">
                   <div class="media">
                     <div class="media-left">
+                      {% for p in palestra.palestrante.all %}
+                      <img class="media-object speaker-img" src="{{ p.image.url }}" alt="{{ p.speaker_name }}">
+                      {% endfor %}
                     </div>
                     <div class="media-body">
-                      <h4 class="media-heading">{{ palestra.hour_init }} {% trans 'até' %} {{ palestra.hour_end }}</h4>
-                      <h5>{{ palestra.talk_name }}</h5>
-                      <p>{{ palestra.talk_description }}</p>
+                      <h3 class="media-heading">{{ palestra.hour_init }} {% trans 'até' %} {{ palestra.hour_end }}</h3>
+                      <p class="palestra-padding">{{ palestra.talk_name }}</p>
+                      <p class="description">{{ palestra.talk_description }}</p>
+                      <p class="palestra-padding">Local: {{ palestra.local}}/{{ palestra.room }}</p>
                     </div>
                   </div>
                 </div>
