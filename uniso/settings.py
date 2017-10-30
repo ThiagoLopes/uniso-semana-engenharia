@@ -163,3 +163,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# Configure your document to register
+DOCUMENT = config('DOCUMENT', default='CPF')
