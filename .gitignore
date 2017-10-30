@@ -107,7 +107,7 @@ db.sqlite3
 tags
 
 # uploads
-uploads/
+uploads/palestrante/
 
 # staticfiles
 staticfiles
