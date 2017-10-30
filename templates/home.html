@@ -77,8 +77,9 @@
       </div>
     </div>
     <!-- End: Desc -->
-    <hr>
     <!-- Start: Speakers -->
+    {% if palestrante_list %}
+    <hr>
     <div class="row me-row content-ct speaker" id="speakers">
       <h2 class="row-title">{% trans 'Palestrantes' %}</h2>
       {% for p in palestrante_list %}
@@ -95,6 +96,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endif %}
   </div>
   <!-- End: Speakers -->
 
