@@ -14,7 +14,7 @@ class Palestrante(models.Model):
 
     speaker_name = models.CharField(_('Nome do palestrante'), max_length=45)
     speaker_description = models.TextField(
-        _('Sobre o palestrante'), max_length=45, null=True)
+        _('Sobre o palestrante'), max_length=120, null=True)
     image = models.ImageField(upload_to='palestrante/%Y',
                               default='speaker-1.png')
     show_home = models.BooleanField(_('Mostrar na pagina inicial?'),
