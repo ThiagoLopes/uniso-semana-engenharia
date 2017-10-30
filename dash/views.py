@@ -6,7 +6,7 @@ class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
     def get_qs_palestrante(self):
-        speaker_four = Palestrante.objects.all()[:6]
+        speaker_four = Palestrante.objects.filter(show_home=True)[:6]
         return speaker_four
 
     def get_qs_palestra(self):
