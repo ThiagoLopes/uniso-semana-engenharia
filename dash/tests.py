@@ -59,6 +59,10 @@ class TestModel(TestCase):
         p = Palestrante.objects.create(**self.data_palestrante)
         self.assertIsInstance(p, Palestrante)
 
+    def test_model_palestra_len_palestrante_zero(self):
+        palestra = Palestra.objects.create(**self.data)
+        self.assertEqual(palestra.len_palestrantes, 0)
+
     def test_model_palestra_len_palestrante_one(self):
         palestrante = Palestrante.objects.create(**self.data_palestrante)
         palestra = Palestra.objects.create(**self.data)
@@ -90,6 +94,10 @@ class TestModel(TestCase):
 
 class TestHomeTemplateView(TestCase):
     def setUp(self):
+        self.data_palestrante = {
+            'speaker_name': 'Man Speaker',
+            'speaker_description': 'Lorem Lorem Lorem',
+        }
         c = Client()
         page = reverse('dash:home')
         self.response = c.get(page)
@@ -104,8 +112,26 @@ class TestHomeTemplateView(TestCase):
     def test_as_context_palestra(self):
         self.assertIsNotNone(self.response.context.get('palestra_list'))
 
+    def test_context_palestra_none(self):
+        self.assertEqual(len(self.response.context.get('palestra_list')), 0)
+
     def test_as_context_palestrante(self):
         self.assertIsNotNone(self.response.context.get('palestrante_list'))
+
+    def test_context_palestrante_none(self):
+        self.assertEqual(len(self.response.context.get('palestrante_list')), 0)
+
+    def test_query_show_home_none(self):
+        Palestrante.objects.create(**self.data_palestrante)
+        self.assertEqual(len(self.response.context.get('palestrante_list')), 0)
+
+    def test_query_show_home_one(self):
+        self.data_palestrante.update({'show_home': True})
+        Palestrante.objects.create(**self.data_palestrante)
+        c = Client()
+        page = reverse('dash:home')
+        self.response = c.get(page)
+        self.assertEqual(len(self.response.context.get('palestrante_list')), 1)
 
     def test_as_context_all_days(self):
         self.assertIsNotNone(self.response.context.get('all_days'))
