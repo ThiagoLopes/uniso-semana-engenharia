@@ -3,3 +3,4 @@ django-extensions==1.9.6
 django-debug-toolbar
 Pillow
 whitenoise==3.3.1
+python-decouple
