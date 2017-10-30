@@ -76,3 +76,17 @@ class Palestra(models.Model):
 
     def __str__(self):
         return self.talk_name
+
+
+class Registred(models.Model):
+
+    name = models.CharField(_('Nome'), max_length=32)
+    age = models.SmallIntegerField(_('Idade'))
+    email = models.EmailField(_('Email'))
+    palestra = models.ForeignKey('Palestra', on_delete=models.CASCADE)
+    document = models.CharField(_('CPF'), max_length=14)
+    created = CreationDateTimeField()
+
+    @property
+    def __str__(self):
+        return self.name
