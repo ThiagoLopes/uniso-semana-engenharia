@@ -15,13 +15,15 @@
           <span class="dot"></span>
         </a>
       </li>
+      {% if palestrante_list %}
       <li>
         <a href="#speakers" class="page-scroll">
           <span class="menu-title">{% trans 'Pessoas' %}</span>
           <span class="dot"></span>
         </a>
       </li>
-      <li>
+      {% endif %}
+      <li class="hide">
         <a href="#tickets" class="page-scroll">
           <span class="menu-title">Inscrição</span>
           <span class="dot"></span>
