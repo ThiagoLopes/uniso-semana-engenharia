@@ -28,7 +28,7 @@ class TestModel(TestCase):
             'room': ' 10b',
             'date': datetime.date.today(),
             'hour_init': t,
-            'hour_end': t.replace(hour=t.hour + 1),
+            'hour_end': t.replace(hour=t.hour),
             'number_vacancies': 100,
         }
         self.data_palestrante = {
