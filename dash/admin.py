@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Palestra, Palestrante
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import Group, User
+from .models import Palestra, Palestrante, Registred
 
 # Register your models here.
 
@@ -14,8 +16,15 @@ class PalestraAdmin(admin.ModelAdmin):
 
 
 class PalestranteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('speaker_name', 'speaker_description',
+                    'show_home')
 
 
+admin.site.site_header = _('Painel semana engenharia')
+admin.site.site_title = _('Painel semana engenharia')
+admin.site.index_title = _('Painel')
 admin.site.register(Palestra, PalestraAdmin)
 admin.site.register(Palestrante, PalestranteAdmin)
+admin.site.register(Registred)
+admin.site.unregister(Group)
+admin.site.unregister(User)
