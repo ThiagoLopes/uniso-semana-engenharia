@@ -4,3 +4,4 @@ django-debug-toolbar
 Pillow
 whitenoise==3.3.1
 python-decouple
+bootstrapform
