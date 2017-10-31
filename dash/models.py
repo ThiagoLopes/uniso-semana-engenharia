@@ -43,6 +43,18 @@ class Palestrante(models.Model):
 
 class Palestra(models.Model):
 
+    MEETUP = 1
+    COURSE = 2
+    SHOWCASE = 3
+    PRESENTATION = 4
+
+    TYPE = (
+        (MEETUP, _('Meetup')),
+        (COURSE, _('Curso')),
+        (SHOWCASE, _('Demonstração')),
+        (PRESENTATION, _('Apresentação'))
+    )
+
     talk_name = models.CharField(
         _('Nome da palestra'), max_length=45, unique=True)
     talk_description = models.TextField(
@@ -55,9 +67,9 @@ class Palestra(models.Model):
     date = models.DateField(
         _('Data'))
     hour_init = models.TimeField(
-        _('Início'))
+        _('Início'), help_text='HH/MM')
     hour_end = models.TimeField(
-        _('Término'))
+        _('Término'), help_text='HH/MM')
     number_vacancies = models.SmallIntegerField(
         _('Vagas'), default=100)
     created = CreationDateTimeField()
@@ -65,6 +77,9 @@ class Palestra(models.Model):
     slug = AutoSlugField(
         populate_from=['talk_name', 'room'])
     palestrante = models.ManyToManyField(Palestrante)
+    type = models.SmallIntegerField(_('Formato'),
+                                    choices=TYPE,
+                                    default=PRESENTATION)
 
     @property
     def str_all_palestrante(self):

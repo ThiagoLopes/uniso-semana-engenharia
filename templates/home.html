@@ -75,7 +75,7 @@
       <div class="col-md-4 feature">
         <span class="ti-world"></span>
         <h3>{% trans 'Certificados' %}</h3>
-        <p>{% trans 'Além das coisas que a pessoa aprender durante o evento participando das  atividades propostas, recebera um certificado de horas apos o termino da semana da engenharia.' %}</p>
+        <p>{% trans 'Durante a participação nos cursos, você terá direito a um certificado de horas após o termino.' %}</p>
       </div>
     </div>
     <!-- End: Desc -->
@@ -165,7 +165,11 @@
                       <h3 class="media-heading">{{ palestra.hour_init }} {% trans 'até' %} {{ palestra.hour_end }}</h3>
                       <p class="palestra-padding">{{ palestra.talk_name }}</p>
                       <p class="description">{{ palestra.talk_description }}</p>
-                      <p class="palestra-padding">Local: {{ palestra.local}}/{{ palestra.room }}</p>
+                      <p class="label label-danger pull-right">{{ palestra.get_type_display }}</p>
+                      {% if palestra.type == 2%}
+                      <a class="btn btn-primary btn-xs" href="#">Cadastro</a>
+                      {% endif %}
+                      <p class="palestra-padding pull-right">Local: {{ palestra.local}}/{{ palestra.room }}</p>
                     </div>
                   </div>
                 </div>
