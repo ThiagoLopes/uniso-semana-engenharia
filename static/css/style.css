@@ -112,6 +112,7 @@ a:hover, a:focus, a:active, a:visited {
 	min-height: 600px;
 	padding: 5em;
 	color: #fff;
+  min-height: 90vh;
 }
 .hero-header h1 {
 	margin: 1em 0 0 0;
@@ -252,7 +253,6 @@ ul.footer-menu li a:hover {
     margin-bottom: 30px;
 }
 .form-control {
-    padding: 20px 15px;
     border: 3px solid #eee;
     background-color: #f9f9f9;
     box-shadow: none;
@@ -373,4 +373,20 @@ z-index:999999;
 
 .palestra-padding{
   padding: 0 10px;
+}
+
+.form-group{
+  color: #404142;
+}
+
+.footer-withou-margin{
+  margin: 0;
+}
+
+.padding-add{
+  padding-bottom: .5em;
+}
+
+.remove-radius{
+  border-radius: 0;
 }

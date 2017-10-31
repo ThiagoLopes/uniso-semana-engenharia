@@ -39,18 +39,22 @@
       {% endif %}
     </ul>
   </nav>
+  {% for m in messages %}
+  <div class="alert alert-success footer-withou-margin remove-radius"
+    role="alert">{{ m }}</div>
+  {% endfor %}
   <div class="container-fluid">
     <!-- Start: Header -->
     <div class="row hero-header" id="home">
       <div class="col-md-7">
         <img src="{% static "img/logodae.png" %}" class="logo">
-        <h1>{% trans 'Semana da Engenharia' %}</h1>
-        <h3>{% trans 'Feito por alunos para alunos' %}</h3>
-        <p>{% trans 'A Setima edição da Semana da Engenharia ocorre no período de 10 de novembro a 17 de novembro na ' %}<a class="text-white shadow" href="https://uniso.br">{% trans 'Universidade de Sorocaba' %}</a>.</p>
-        <p>{% trans 'O evento busca oferecer a oportunidade de dialogo e compartilhamento de conhecimento entre alunos, docentes, empresas e até mesmo pessoas interessadas.' %}</p>
-        <p>{% trans 'Conheça a programação e se inscreva no que melhor te reapresenta!' %} </p>
-        <h4>20<sup>th</sup> a 22<sup>nd</sup>  {% trans 'Outubro' %}, 2017</h4>
-        <a href="#" class="btn btn-lg btn-red">Inscreva-se</a>
+        <h1>{% trans 'VII Semana da Engenharia UNISO' %}</h1>
+        <h3>{% trans 'Organizado por alunos e professores para alunos e a comunidade' %}</h3>
+        <p>{% trans ' A Setima edição da Semana da Engenharia ocorre entre os dias de 13 à 17 de novembro na ' %}<a class="text-white shadow" href="https://uniso.br">{% trans 'Universidade de Sorocaba' %}</a>.</p>
+        <p>{% trans 'O evento busca oferecer a oportunidade de dialogo e compartilhamento de conhecimento entre alunos, docentes, empresas e até mesmo pessoas interessadas' %}</p>
+        <p>{% trans 'Conheça a programação e se inscreva no que melhor te representa!' %} </p>
+        <h4>{% trans 'Inscrições de' %} 01<sup>th</sup> a 09<sup>nd</sup>  {% trans 'de Novembro' %}, 2017</h4>
+        <a href="{% url 'dash:registred' %}" class="btn btn-lg btn-red">Inscreva-se</a>
       </div>
       <div class="col-md-5 hidden-xs">
         <img src="{% static "img/rocket.png" %}" class="rocket animated bounce">
@@ -65,7 +69,7 @@
       <div class="col-md-4 feature">
         <span class="ti-ticket"></span>
         <h3>{% trans 'Palestra e Atividades'%}</h3>
-        <p>{% trans 'Durante esses dias será possível receber um pouco de conhecimento e da  vivencia por meio de pessoas que fazem parte do mercado.' %}</p>
+        <p>{% trans 'Durante esses dias será possível adquirir um pouco de conhecimento e participar a vivencia por meio de pessoas que fazem parte do mercado.' %}</p>
       </div>
       <div class="col-md-4 feature">
         <span class="ti-microphone"></span>
@@ -75,7 +79,7 @@
       <div class="col-md-4 feature">
         <span class="ti-world"></span>
         <h3>{% trans 'Certificados' %}</h3>
-        <p>{% trans 'Durante a participação nos cursos, você terá direito a um certificado de horas após o termino.' %}</p>
+        <p>{% trans 'Além do conhecimento adquirido durante o evento e das atividades propostas, o participante receberá um certificado de horas.' %}</p>
       </div>
     </div>
     <!-- End: Desc -->
@@ -165,9 +169,9 @@
                       <h3 class="media-heading">{{ palestra.hour_init }} {% trans 'até' %} {{ palestra.hour_end }}</h3>
                       <p class="palestra-padding">{{ palestra.talk_name }}</p>
                       <p class="description">{{ palestra.talk_description }}</p>
-                      <p class="label label-danger pull-right">{{ palestra.get_type_display }}</p>
+                      <p class="label label-primary pull-right">{{ palestra.get_type_display }}</p>
                       {% if palestra.type == 2%}
-                      <a class="btn btn-primary btn-xs" href="#">Cadastro</a>
+                      <p class="label label-danger">{% trans 'Requer inscrição' %}</p>
                       {% endif %}
                       <p class="palestra-padding pull-right">Local: {{ palestra.local}}/{{ palestra.room }}</p>
                     </div>
