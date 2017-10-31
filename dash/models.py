@@ -40,6 +40,10 @@ class Palestrante(models.Model):
         if self.image.name != 'speaker-1.png':
             self.crop_image(self.image)
 
+    class Meta:
+        verbose_name = _('Palestrante cadastrado')
+        verbose_name_plural = _('Palestrantes cadastrados')
+
 
 class Palestra(models.Model):
 
@@ -92,16 +96,24 @@ class Palestra(models.Model):
     def __str__(self):
         return self.talk_name
 
+    class Meta:
+        verbose_name = _('Palestra cadastrada')
+        verbose_name_plural = _('Palestras cadastrados')
+
 
 class Registred(models.Model):
 
     name = models.CharField(_('Nome'), max_length=32)
     age = models.SmallIntegerField(_('Idade'))
     email = models.EmailField(_('Email'))
-    palestra = models.ForeignKey('Palestra', on_delete=models.CASCADE)
-    document = models.CharField(_('CPF'), max_length=14)
+    palestra = models.ManyToManyField('Palestra')
+    document = models.CharField(_('CPF'), max_length=14, unique=True)
     created = CreationDateTimeField()
 
     @property
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('Estudante cadastrado')
+        verbose_name_plural = _('Estudantes cadastrados')

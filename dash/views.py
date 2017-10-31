@@ -1,5 +1,9 @@
 from django.views.generic.base import TemplateView
-from .models import Palestra, Palestrante
+from django.views.generic.edit import CreateView
+from django.utils.translation import gettext_lazy as _
+from django.contrib.messages.views import SuccessMessageMixin
+from .models import Palestra, Palestrante, Registred
+from .forms import RegistredForms
 
 
 class HomeTemplateView(TemplateView):
@@ -25,3 +29,18 @@ class HomeTemplateView(TemplateView):
 
 
 home_template_view = HomeTemplateView.as_view()
+
+
+class RegistredFormView(SuccessMessageMixin, CreateView):
+    template_name = 'registred_new.html'
+    form_class = RegistredForms
+    success_url = '/'
+    model = Registred
+    success_message = _('Inscrição concluida com sucesso')
+
+    def get(self, *args, **kwargs):
+        context = super().get(*args, **kwargs)
+        return context
+
+
+registred_form_view = RegistredFormView.as_view()
