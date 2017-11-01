@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import re
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -7,9 +9,12 @@ from .models import Registred, Palestra
 
 class PalestraChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
-        return '{} / {}-{}'.format(str(obj),
-                                   obj.hour_init.strftime('%H:%M'),
-                                   obj.hour_end.strftime('%H:%H'))
+        return _('{} / Dia {}, das {} às {}').format(
+           str(obj),
+           obj.date.day,
+           obj.hour_init.strftime('%H:%M'),
+           obj.hour_end.strftime('%H:%H')
+        )
 
 
 class RegistredForms(forms.ModelForm):
