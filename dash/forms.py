@@ -5,6 +5,13 @@ from django import forms
 from .models import Registred, Palestra
 
 
+class PalestraChoiceField(forms.ModelMultipleChoiceField):
+    def label_from_instance(self, obj):
+        return '{} / {}-{}'.format(str(obj),
+                                   obj.hour_init.strftime('%H:%M'),
+                                   obj.hour_end.strftime('%H:%H'))
+
+
 class RegistredForms(forms.ModelForm):
 
     error_messages = {
@@ -15,7 +22,7 @@ class RegistredForms(forms.ModelForm):
         'age_not_allow': _('Apenas maiores de 16')
     }
 
-    palestra = forms.ModelMultipleChoiceField(
+    palestra = PalestraChoiceField(
         label=_('Cursos'),
         help_text=_('Apenas cursos necessitam de inscrição'),
         queryset=Palestra.objects.filter(type=Palestra.COURSE),
