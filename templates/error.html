@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+
+<style>
+  body{
+	background: #016cc7;
+  }
+</style>
+
+<div class="hero-header-error">
+    <div class="error-template">
+      <h1> Oops!</h1>
+      <h2>{{ error }}</h2>
+      <div class="error-details">
+        {{ error_detail }}
+      </div>
+      <br>
+      <div class="error-actions">
+        <a href="{% url 'dash:home' %}" class="btn btn-primary btn-lg"><span
+            class="glyphicon glyphicon-home"></span>{% trans ' Pagina inicial' %}</a>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

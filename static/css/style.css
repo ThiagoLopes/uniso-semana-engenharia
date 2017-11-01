@@ -390,3 +390,10 @@ z-index:999999;
 .remove-radius{
   border-radius: 0;
 }
+
+.hero-header-error {
+	background: #016cc7;
+	min-height: 600px;
+	padding: 5em;
+	color: #fff;
+}

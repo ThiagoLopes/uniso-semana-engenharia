@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
 from .models import Palestra, Palestrante, Registred
 from .forms import RegistredForms
 
@@ -38,9 +39,23 @@ class RegistredFormView(SuccessMessageMixin, CreateView):
     model = Registred
     success_message = _('Inscrição concluida com sucesso')
 
+    @property
+    def qs_registred_as_course(self):
+        qs = Palestra.objects.filter(type=Palestra.COURSE)
+        if len(qs) == 0:
+            return False
+        return True
+
     def get(self, *args, **kwargs):
         context = super().get(*args, **kwargs)
-        return context
+        if self.qs_registred_as_course:
+            return context
+        else:
+            error = {
+                'error': _('Parece que ainda não há cursos cadastrados!'),
+                'error_detail': _('Iremos contactar nossos estagiários.')
+            }
+            return render(self.request, 'error.html', error)
 
 
 registred_form_view = RegistredFormView.as_view()
