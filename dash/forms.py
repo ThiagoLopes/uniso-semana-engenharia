@@ -13,7 +13,7 @@ class PalestraChoiceField(forms.ModelMultipleChoiceField):
            str(obj),
            obj.date.day,
            obj.hour_init.strftime('%H:%M'),
-           obj.hour_end.strftime('%H:%H')
+           obj.hour_end.strftime('%H:%M')
         )
 
 
